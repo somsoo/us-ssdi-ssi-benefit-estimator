@@ -500,11 +500,11 @@
   }
 
   function calculate() {
-    const annualEarnings = Math.max(0, parseFloat(avgAnnualEarningsEl.value) || 0);
+    const annualEarnings = Math.max(0, Math.max(0, parseFloat(avgAnnualEarningsEl.value) || 0));
     const workYears = Math.max(1, parseInt(workYearsEl.value, 10) || 1);
-    const monthlyEarned = Math.max(0, parseFloat(monthlyEarnedEl.value) || 0);
+    const monthlyEarned = Math.max(0, Math.max(0, parseFloat(monthlyEarnedEl.value) || 0));
     const isCouple = maritalStatusEl.value === 'couple';
-    const assets = Math.max(0, parseFloat(totalAssetsEl.value) || 0);
+    const assets = Math.max(0, Math.max(0, parseFloat(totalAssetsEl.value) || 0));
 
     // 1. SGA screen ($1,620 non-blind limit for 2026)
     const sgaLimit = 1620;
