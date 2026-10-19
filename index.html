@@ -1,28 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>SSDI &amp; SSI Benefits Calculator - Under maintenance</title>
-<meta name="robots" content="noindex, nofollow">
-<meta name="site-status" content="maintenance">
-<meta name="description" content="This tool is temporarily offline while it is rebuilt.">
+<title>SSDI &amp; SSI Benefit Estimator</title>
+<meta name="description" content="Estimate Social Security Disability and Supplemental Security Income benefits.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/">
+<meta name="theme-color" content="#4338ca">
+<link rel="icon" href="/favicon.ico">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="SSDI &amp; SSI Benefit Estimator">
+<meta property="og:title" content="SSDI &amp; SSI Benefit Estimator">
+<meta property="og:description" content="Estimate Social Security Disability and Supplemental Security Income benefits.">
+<meta property="og:url" content="https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/">
+<meta property="og:image" content="https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="SSDI &amp; SSI Benefit Estimator">
+<meta name="twitter:description" content="Estimate Social Security Disability and Supplemental Security Income benefits.">
+<meta name="twitter:image" content="https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/og-image.png">
+<link rel="alternate" type="application/rss+xml" title="SSDI SSI Estimator RSS" href="https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/rss.xml">
+<link rel="sitemap" type="application/xml" href="https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/sitemap.xml">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/#webapp",
+      "name": "SSDI & SSI Benefit Estimator",
+      "url": "https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/",
+      "applicationCategory": "GovernmentApplication",
+      "operatingSystem": "All",
+      "inLanguage": "en",
+      "description": "Interactive calculator estimating SSDI and SSI disability payment amounts, work credit requirements, and SGA earnings thresholds.",
+      "image": "https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/og-image.png",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://us-ssdi-ssi-benefit-estimator.enjoy-onepage.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the key difference between SSDI and SSI disability benefits?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SSDI is an earned insurance benefit funded by payroll FICA taxes based on your work history, while SSI is a needs-based program for disabled individuals with limited income and assets."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I work while receiving SSDI disability payments?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, but your gross monthly earnings cannot exceed the Substantial Gainful Activity (SGA) limit of $1,620 for non-blind individuals (or $2,700 for blind individuals) unless in a Trial Work Period."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I receive both SSDI and SSI benefits at the same time?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, this is known as concurrent benefits. If your monthly SSDI payment is less than the maximum SSI federal benefit rate plus $20, SSI can supplement the difference."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6946654760086847" crossorigin="anonymous"></script>
 <style>
-  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #0f172a; }
-  main { max-width: 560px; margin: 12vh auto; padding: 32px 24px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; }
-  h1 { font-size: 1.4rem; margin: 0 0 12px; }
-  p { line-height: 1.6; color: #334155; }
-  a { color: #1d4ed8; font-weight: 600; }
-  .tag { display: inline-block; font-size: .8rem; font-weight: 700; color: #92400e; background: #fef3c7; border-radius: 999px; padding: 4px 10px; margin-bottom: 14px; }
+  :root {
+    --primary: #4338ca;
+    --primary-hover: #3730a3;
+    --border: #e2e8f0;
+    --bg: #f8fafc;
+    --surface: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text-main);
+    line-height: 1.5;
+    padding: 0 16px;
+  }
+  .container { max-width: 1040px; margin: 0 auto; padding: 24px 0 48px; }
+  header { text-align: center; margin-bottom: 24px; }
+  header h1 { font-size: 1.85rem; font-weight: 800; color: #1e293b; margin-bottom: 6px; }
+  header p { font-size: 0.95rem; color: var(--text-muted); }
+
+  .manual-ad-box {
+    margin: 16px auto;
+    text-align: center;
+    background: transparent;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+  @media (min-width: 768px) {
+    .grid2 { grid-template-columns: 1fr 1fr; }
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  }
+  .card h2 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    color: #1e293b;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .form-group { margin-bottom: 14px; }
+  .form-label { display: block; font-size: 0.82rem; font-weight: 600; color: #334155; margin-bottom: 4px; }
+  .form-input, .form-select {
+    width: 100%;
+    padding: 9px 12px;
+    font-size: 0.9rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    background: #ffffff;
+  }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(67,56,202,0.12);
+  }
+
+  .summary-banner {
+    background: #eef2ff;
+    border: 2px solid #c7d2fe;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 18px;
+  }
+  .summary-title { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; color: #3730a3; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .summary-value { font-size: 2.1rem; font-weight: 800; color: #1e1b4b; font-family: ui-monospace, SFMono-Regular, monospace; }
+  .summary-sub { font-size: 0.8rem; color: #4338ca; font-weight: 600; margin-top: 4px; }
+
+  .dual-stat {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .stat-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-card .v { font-size: 1.15rem; font-weight: 800; color: #1e293b; }
+  .stat-card .l { font-size: 0.72rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; }
+
+  .breakdown-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  .breakdown-table tr { border-bottom: 1px solid #f1f5f9; }
+  .breakdown-table tr:last-child { border-bottom: none; }
+  .breakdown-table td { padding: 8px 4px; }
+  .breakdown-table .k { color: var(--text-muted); font-weight: 500; }
+  .breakdown-table .v { text-align: right; font-weight: 700; color: #1e293b; }
+
+  .elig-tag {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .elig-pass { background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; }
+  .elig-warn { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+
+  .info-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .info-section h2 { font-size: 1.2rem; font-weight: 700; color: #1e293b; margin-bottom: 16px; }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 640px) {
+    .info-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .how-step {
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .how-step .step-num {
+    display: inline-block;
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    background: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 800;
+    border-radius: 50%;
+    text-align: center;
+    margin-bottom: 8px;
+  }
+  .how-step h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; color: #1e293b; }
+  .how-step p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
+
+  .faq-list { margin-top: 14px; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 0;
+  }
+  .faq-item:last-child { border-bottom: none; }
+  .faq-item h3 { font-size: 0.95rem; font-weight: 700; color: #1e293b; margin-bottom: 4px; }
+  .faq-item p { font-size: 0.85rem; color: #475569; line-height: 1.5; }
+
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f172a;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: .85rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+    z-index: 9999;
+  }
+  .toast.show { opacity: 1; }
+
+  footer {
+    text-align: center;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 24px;
+  }
+  footer a { color: var(--text-muted); text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: var(--text-main); text-decoration: underline; }
 </style>
 </head>
 <body>
-<main>
-  <span class="tag">Under maintenance</span>
-  <h1>SSDI &amp; SSI Benefits Calculator</h1>
-  <p>This tool is temporarily offline. We found that the previous version did not work the way it was described, so we took it down while we rebuild it properly.</p>
-  <p>Please check back later.</p>
-  <p><a href="https://enjoy-onepage.com/">Browse our other free tools</a></p>
-</main>
+<div class="container">
+  <header>
+    <h1>SSDI &amp; SSI Benefit Estimator</h1>
+    <p>Estimate Social Security Disability Insurance (SSDI) and Supplemental Security Income (SSI) payments.</p>
+  </header>
+
+  <!-- ADSENSE START: top -->
+  <div class="manual-ad-box ad-top-banner" style="width: 100%; max-width: 960px; min-height: 100px; margin: 0 auto 16px; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 100px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="3824727725"
+         data-ad-format="horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: top -->
+
+  <div class="grid2">
+    <section class="card">
+      <h2>Earnings &amp; Financial Profile</h2>
+
+      <div class="form-group">
+        <label class="form-label" for="avgAnnualEarnings">Average Recent Annual Earnings ($)</label>
+        <input type="number" id="avgAnnualEarnings" class="form-input" value="48000" min="0" step="1000">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="workYears">Years Worked with Social Security FICA Taxes</label>
+        <input type="number" id="workYears" class="form-input" value="12" min="1" max="45">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="monthlyEarned">Current Monthly Earnings from Work ($)</label>
+        <input type="number" id="monthlyEarned" class="form-input" value="400" min="0" step="50">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="maritalStatus">Marital Status (For SSI Eligibility)</label>
+        <select id="maritalStatus" class="form-select">
+          <option value="single" selected>Individual Filer (Max SSI: $943/mo)</option>
+          <option value="couple">Eligible Couple (Max SSI: $1,415/mo)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="totalAssets">Countable Financial Assets ($)</label>
+        <input type="number" id="totalAssets" class="form-input" value="1200" min="0" step="100">
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Estimated Monthly Benefits</h2>
+
+      <div class="summary-banner">
+        <div class="summary-title">Total Estimated Monthly Payment</div>
+        <div class="summary-value" id="valTotalDisability">$1,720 / mo</div>
+        <div class="summary-sub" id="valAnnualDisability">Annual Benefit: $20,640 / yr</div>
+      </div>
+
+      <div class="dual-stat">
+        <div class="stat-card">
+          <div class="v" id="valSsdiAmt">$1,720 / mo</div>
+          <div class="l">SSDI (Work History)</div>
+        </div>
+        <div class="stat-card">
+          <div class="v" id="valSsiAmt">$0 / mo</div>
+          <div class="l">SSI (Needs Based)</div>
+        </div>
+      </div>
+
+      <div class="elig-tag elig-pass" id="sgaTag">
+        <span>SGA Earnings Status:</span>
+        <span id="sgaStatus">Under $1,620 Limit (Eligible)</span>
+      </div>
+
+      <div class="elig-tag elig-pass" id="assetTag">
+        <span>SSI Asset Test ($2k cap):</span>
+        <span id="assetStatus">Passed ($1,200)</span>
+      </div>
+
+      <table class="breakdown-table">
+        <tbody>
+          <tr>
+            <td class="k">Substantial Gainful Activity (SGA) Cap:</td>
+            <td class="v">$1,620 / mo</td>
+          </tr>
+          <tr>
+            <td class="k">SSDI Work Credits Requirement:</td>
+            <td class="v" id="valCredits">Passed (40+ Credits)</td>
+          </tr>
+          <tr>
+            <td class="k">Health Coverage Bridge:</td>
+            <td class="v" id="valHealthBridge">Medicare (after 24 mos)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <!-- ADSENSE START: mid -->
+  <div class="manual-ad-box ad-mid-banner" style="width: 100%; max-width: 960px; min-height: 250px; margin: 20px auto; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 250px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="1186914926"
+         data-ad-format="rectangle,horizontal"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: mid -->
+
+  <section class="info-section">
+    <h2>How Disability Benefits are Evaluated</h2>
+    <div class="info-grid">
+      <div class="how-step">
+        <span class="step-num">1</span>
+        <h3>Work History Check</h3>
+        <p>SSDI checks whether you earned at least 20 Social Security credits during the 10 years before disability.</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">2</span>
+        <h3>SGA Wage Screen</h3>
+        <p>Gross work earnings must remain below the federal Substantial Gainful Activity (SGA) threshold ($1,620/mo).</p>
+      </div>
+      <div class="how-step">
+        <span class="step-num">3</span>
+        <h3>Calculate Monthly Sum</h3>
+        <p>SSDI is determined by indexed past wages, while SSI provides a needs-based monthly floor up to $943/mo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item"><h3>What is the key difference between SSDI and SSI disability benefits?</h3><p>SSDI is an earned insurance benefit funded by payroll FICA taxes based on your work history, while SSI is a needs-based program for disabled individuals with limited income and assets.</p></div>
+      <div class="faq-item"><h3>Can I work while receiving SSDI disability payments?</h3><p>Yes, but your gross monthly earnings cannot exceed the Substantial Gainful Activity (SGA) limit of $1,620 for non-blind individuals (or $2,700 for blind individuals) unless in a Trial Work Period.</p></div>
+      <div class="faq-item"><h3>Can I receive both SSDI and SSI benefits at the same time?</h3><p>Yes, this is known as concurrent benefits. If your monthly SSDI payment is less than the maximum SSI federal benefit rate plus $20, SSI can supplement the difference.</p></div>
+    </div>
+  </section>
+
+  <!-- ADSENSE START: bottom -->
+  <div class="manual-ad-box ad-bottom-banner" style="width: 100%; max-width: 960px; min-height: 280px; margin: 24px auto 16px; text-align: center; background: transparent;">
+    <ins class="adsbygoogle"
+         style="display:block; min-height: 280px;"
+         data-ad-client="ca-pub-6946654760086847"
+         data-ad-slot="3416334507"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <!-- ADSENSE END: bottom -->
+
+  <div id="global-ux-toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer>
+    <p>&copy; 2026 SSDI &amp; SSI Benefit Estimator. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="/privacy.html">Privacy Policy</a> &bull;
+      <a href="/terms.html">Terms of Service</a> &bull;
+      <a href="/disclaimer.html">Disclaimer</a>
+    </p>
+  </footer>
+</div>
+
+<!-- LOGIC START -->
+<script>
+(function() {
+  const avgAnnualEarningsEl = document.getElementById('avgAnnualEarnings');
+  const workYearsEl = document.getElementById('workYears');
+  const monthlyEarnedEl = document.getElementById('monthlyEarned');
+  const maritalStatusEl = document.getElementById('maritalStatus');
+  const totalAssetsEl = document.getElementById('totalAssets');
+
+  const valTotalDisabilityEl = document.getElementById('valTotalDisability');
+  const valAnnualDisabilityEl = document.getElementById('valAnnualDisability');
+  const valSsdiAmtEl = document.getElementById('valSsdiAmt');
+  const valSsiAmtEl = document.getElementById('valSsiAmt');
+  const sgaTagEl = document.getElementById('sgaTag');
+  const sgaStatusEl = document.getElementById('sgaStatus');
+  const assetTagEl = document.getElementById('assetTag');
+  const assetStatusEl = document.getElementById('assetStatus');
+  const valCreditsEl = document.getElementById('valCredits');
+  const valHealthBridgeEl = document.getElementById('valHealthBridge');
+
+  function fmt(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calculate() {
+    const annualEarnings = Math.max(0, parseFloat(avgAnnualEarningsEl.value) || 0);
+    const workYears = Math.max(1, parseInt(workYearsEl.value, 10) || 1);
+    const monthlyEarned = Math.max(0, parseFloat(monthlyEarnedEl.value) || 0);
+    const isCouple = maritalStatusEl.value === 'couple';
+    const assets = Math.max(0, parseFloat(totalAssetsEl.value) || 0);
+
+    // 1. SGA screen ($1,620 non-blind limit for 2026)
+    const sgaLimit = 1620;
+    if (monthlyEarned >= sgaLimit) {
+      sgaTagEl.className = 'elig-tag elig-warn';
+      sgaStatusEl.textContent = 'Exceeds $' + sgaLimit + ' SGA Cap (May disqualify)';
+    } else {
+      sgaTagEl.className = 'elig-tag elig-pass';
+      sgaStatusEl.textContent = 'Under $' + sgaLimit + ' Limit (Eligible)';
+    }
+
+    // 2. SSDI Primary Insurance Amount (PIA) calculation based on AIME bend points
+    // AIME = monthly average
+    const aime = annualEarnings / 12;
+    let ssdiPia = 0;
+    if (workYears >= 5 && aime > 0) {
+      // 2026 bend points: 90% of first $1,174 + 32% of AIME up to $7,078 + 15% above
+      const p1 = Math.min(aime, 1174) * 0.90;
+      const p2 = (aime > 1174) ? (Math.min(aime, 7078) - 1174) * 0.32 : 0;
+      const p3 = (aime > 7078) ? (aime - 7078) * 0.15 : 0;
+      ssdiPia = Math.min(3822, p1 + p2 + p3);
+    }
+    valSsdiAmtEl.textContent = fmt(ssdiPia) + ' / mo';
+
+    // Credits
+    const credits = Math.min(40, workYears * 4);
+    valCreditsEl.textContent = (credits >= 20) ? ('Passed (' + credits + ' Credits)') : ('Warning: Only ' + credits + ' Credits');
+
+    // 3. SSI Needs-based calculation
+    const maxSsi = isCouple ? 1415 : 943;
+    const assetCap = isCouple ? 3000 : 2000;
+
+    let ssiAmt = 0;
+    const assetPass = assets <= assetCap;
+    if (assetPass) {
+      assetTagEl.className = 'elig-tag elig-pass';
+      assetStatusEl.textContent = 'Passed ($' + Math.round(assets).toLocaleString() + ' / $' + assetCap + ')';
+
+      // SSI countable income offset
+      // SSDI counts as unearned income (first $20 exempt)
+      const countableUnearned = Math.max(0, ssdiPia - 20);
+      // Earned income (first $65 exempt + 50% remainder)
+      const countableEarned = Math.max(0, (monthlyEarned - 65) / 2);
+
+      const totalCountable = countableUnearned + countableEarned;
+      ssiAmt = Math.max(0, maxSsi - totalCountable);
+    } else {
+      assetTagEl.className = 'elig-tag elig-warn';
+      assetStatusEl.textContent = 'Exceeds $' + assetCap + ' Cap ($' + Math.round(assets).toLocaleString() + ')';
+      ssiAmt = 0;
+    }
+    valSsiAmtEl.textContent = fmt(ssiAmt) + ' / mo';
+
+    // 4. Combined
+    const totalMonthly = ssdiPia + ssiAmt;
+    valTotalDisabilityEl.textContent = fmt(totalMonthly) + ' / mo';
+    valAnnualDisabilityEl.textContent = 'Annual Benefit: ' + fmt(totalMonthly * 12) + ' / yr';
+
+    // Health bridge
+    if (ssdiPia > 0 && ssiAmt > 0) {
+      valHealthBridgeEl.textContent = 'Medicaid (Immediate) + Medicare (24 mos)';
+    } else if (ssiAmt > 0) {
+      valHealthBridgeEl.textContent = 'Immediate State Medicaid';
+    } else if (ssdiPia > 0) {
+      valHealthBridgeEl.textContent = 'Medicare (after 24-month wait)';
+    } else {
+      valHealthBridgeEl.textContent = 'State Healthcare Marketplace';
+    }
+  }
+
+  [avgAnnualEarningsEl, workYearsEl, monthlyEarnedEl, maritalStatusEl, totalAssetsEl].forEach(el => {
+    el.addEventListener('input', calculate);
+    el.addEventListener('change', calculate);
+  });
+
+  calculate();
+})();
+</script>
+<!-- LOGIC END -->
 </body>
 </html>
